@@ -84,14 +84,19 @@ const mathReducer = (state = {
 };
 
 
-const myLogger = (store) => (next) => (action) => {
-    console.log("Logged Action ", action);
-    next(action);
-}
-const store = createStore(combineReducers({mathReducer, userReducer}), {}, applyMiddleware(myLogger, createLogger()));
+// Custom logger
+//
+// const myLogger = (store) => (next) => (action) => {
+//     console.log("Logged Action ", action);
+//     next(action);
+// }
+//const store = createStore(combineReducers({mathReducer, userReducer}), {}, applyMiddleware(myLogger));
+
+// Using the redux-logger logger
+const store = createStore(combineReducers({mathReducer, userReducer}), {}, applyMiddleware(createLogger()));
 
 store.subscribe(() => {
-    console.log('store updated', store.getState());
+    //console.log('store updated', store.getState());
 });
 
 store.dispatch({
